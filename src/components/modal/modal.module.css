@@ -1,0 +1,40 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    box-sizing: border-box;
+    border-radius: 40px;
+    background-color: #1C1C21;
+    width: 720px;
+}
+.modal__header {
+    min-height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modal__closeIcon {
+    transition: 0.5s all;
+    cursor: pointer;
+}
+.modal__closeIcon:hover {
+    opacity: .5;
+}
+.nutritional__block {
+    display: flex;
+    gap: 20px
+}
+.nutritional__value {
+    min-width: 112px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}

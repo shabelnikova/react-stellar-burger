@@ -1,0 +1,42 @@
+.burger__constructor {
+    max-width: 600px;
+}
+.burger__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.burger__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.burger__order {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.burger__price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.scroll__container {
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 480px;
+
+}
+.scroll__container::-webkit-scrollbar {
+    width: 12px;
+}
+.scroll__container::-webkit-scrollbar-track {
+    background: #2f2f37;
+}
+
+.scroll__container::-webkit-scrollbar-thumb {
+    background: #8585ad;
+    border: 3px solid #2f2f37;
+    border-radius: 6px;
+}
