@@ -4,15 +4,12 @@ import React from 'react';
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import orderImage from '../../images/done.png'
 
-const OrderDetails = ({onClose}) => {
+const OrderDetails = () => {
 
   return (
      <div className='pt-15  pb-30 pl-10 pr-10' onClick={e => e.stopPropagation()}>
        <div className={cn(styles.modal__header)}>
          <p className={ "text text_type_main-large"}></p>
-         <div className={cn(styles.modal__closeIcon)}>
-           <CloseIcon type="primary" onClick={onClose}/>
-         </div>
        </div>
      <div className={cn(styles.modal__info)}>
        <p className="text text_type_digits-large mb-8">367890</p>

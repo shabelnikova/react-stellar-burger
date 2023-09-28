@@ -9,7 +9,7 @@ const BurgerIngredients = ({burgerData}) => {
   const [current, setCurrent] = useState('Булки')
   return (
     <section className={cn(styles.cards)}>
-      <div style={{ display: 'flex'}} className={'mb-10'}>
+      <div className={cn(styles.tab__container, 'mb-10')}>
         <Tab active={current === 'Булки'} value={'Булки'} onClick={setCurrent}>Булки</Tab>
         <Tab active={current === 'Соусы'} value={'Соусы'} onClick={setCurrent}>Соусы</Tab>
         <Tab active={current === 'Начинки'} value={'Начинки'} onClick={setCurrent}>Начинки</Tab>
@@ -21,6 +21,6 @@ const BurgerIngredients = ({burgerData}) => {
   )
 }
 BurgerIngredients.propTypes = {
-  burgerDataPropType
+  burgerData: burgerDataPropType
 }
 export default BurgerIngredients;

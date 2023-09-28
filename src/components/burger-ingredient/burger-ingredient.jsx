@@ -21,9 +21,7 @@ const BurgerIngredient = ({item}) => {
               <Counter count={0} size="default" extraClass="m-1" />
             </div>
             {isActive && <Modal isActive={isActive} setActive={setActive}>
-              <IngredientDetails onClose={() => setActive(false)}
-              item={item}
-              />
+              <IngredientDetails item={item}/>
             </Modal>}
           </>
   );

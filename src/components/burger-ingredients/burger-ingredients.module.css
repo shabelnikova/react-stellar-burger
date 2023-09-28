@@ -4,6 +4,9 @@
     flex-direction: column;
 
 }
+.tab__container {
+    display: flex;
+}
 .scroll__container {
     overflow-y: scroll;
     max-height: 100vh;

@@ -14,5 +14,5 @@ export const ingredientPropType = PropTypes.shape({
   __v: PropTypes.number,
   _id: PropTypes.string
 });
-export const burgerDataPropType = PropTypes.arrayOf(PropTypes.object);
+export const burgerDataPropType = PropTypes.arrayOf(ingredientPropType);
 

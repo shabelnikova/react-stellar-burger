@@ -15,9 +15,7 @@ const BurgerConstructor = ({burgerData}) => {
   }
   const randomBun = buns[getRandomArrIndex(buns)];
 
-  let sum = randomBun.price * 2  + mainsAndSauces.reduce((acc, i) => {
-    return acc + i.price
-  }, 0);
+  let sum = randomBun.price * 2  + mainsAndSauces.reduce((acc, i) => acc + i.price, 0);
   return <>
     <section className={cn(styles.burger__constructor)}>
       <div className={cn(styles.burger__item, 'ml-8 mb-4' +
@@ -58,12 +56,12 @@ const BurgerConstructor = ({burgerData}) => {
       </div>
     </section>
     {isActive && <Modal isActive={isActive} setActive={setActive}>
-      <OrderDetails onClose={() => setActive(false)}/>
+      <OrderDetails />
     </Modal>}
   </>;
 };
 BurgerConstructor.propTypes = {
-  burgerDataPropType
+  burgerData: burgerDataPropType
 }
 
 export default BurgerConstructor;

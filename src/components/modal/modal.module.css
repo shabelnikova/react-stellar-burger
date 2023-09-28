@@ -21,6 +21,9 @@
     align-items: center;
 }
 .modal__closeIcon {
+    position: absolute;
+    top: 80px;
+    right: 40px;
     transition: 0.5s all;
     cursor: pointer;
 }
