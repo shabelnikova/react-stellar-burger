@@ -1,0 +1,23 @@
+.cards__img {
+    max-width: 240px;
+    object-fit: cover;
+}
+.card__digits {
+    margin: 0;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+}
+.card__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.card__description {
+    text-align: center;
+}
