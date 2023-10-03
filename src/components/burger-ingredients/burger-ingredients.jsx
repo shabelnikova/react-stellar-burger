@@ -3,24 +3,29 @@ import cn from 'classnames';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import {useState} from "react";
 import BurgerIngredientsCategory from "../burger-ingredients-category/burger-ingredients-category";
-import {burgerDataPropType} from "../../utils/prop-types";
 
-const BurgerIngredients = ({burgerData}) => {
-  const [current, setCurrent] = useState('Булки')
+const BurgerIngredients = () => {
+  const [currentTab, setCurrentTab] = useState('buns')
+  const onClickTab = (tab) => {
+    setCurrentTab(tab);
+    const element = document.getElementById(tab);
+    if(element) {
+      element.scrollIntoView({behavior: 'smooth'})
+    }
+  }
+
   return (
     <section className={cn(styles.cards)}>
       <div className={cn(styles.tab__container, 'mb-10')}>
-        <Tab active={current === 'Булки'} value={'Булки'} onClick={setCurrent}>Булки</Tab>
-        <Tab active={current === 'Соусы'} value={'Соусы'} onClick={setCurrent}>Соусы</Tab>
-        <Tab active={current === 'Начинки'} value={'Начинки'} onClick={setCurrent}>Начинки</Tab>
+        <Tab active={currentTab === 'buns'} value={'buns'} onClick={onClickTab}>Булки</Tab>
+        <Tab active={currentTab === 'sauces'} value={'sauces'} onClick={onClickTab}>Соусы</Tab>
+        <Tab active={currentTab === 'mains'} value={'mains'} onClick={onClickTab}>Начинки</Tab>
       </div>
       <div className={cn(styles.scroll__container)}>
-        <BurgerIngredientsCategory burgerData={burgerData}/>
+        <BurgerIngredientsCategory setCurrentTab={setCurrentTab}/>
       </div>
     </section>
   )
 }
-BurgerIngredients.propTypes = {
-  burgerData: burgerDataPropType
-}
+
 export default BurgerIngredients;
