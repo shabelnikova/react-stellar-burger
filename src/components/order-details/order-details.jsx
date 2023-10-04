@@ -14,7 +14,7 @@ const OrderDetails = () => {
   idArray.push(bun?._id);
   useEffect(() => {
     dispatch(getOrderResponse(idArray));
-    return () => {dispatch(clearConstructor()); dispatch(resetOrderNumber())}
+    return () => dispatch(resetOrderNumber())
   }, [])
 
   return (

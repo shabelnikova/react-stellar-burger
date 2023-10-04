@@ -1,4 +1,5 @@
 import {request} from "../../utils/api";
+import {clearConstructor} from "./constructor-action";
 
 
 export const GET_ORDER = 'GET_ORDER';
@@ -18,7 +19,10 @@ return (dispatch, getState) => {
         ingredients: array
       })
     })
-       .then(res => dispatch(getOrderNumber(res.order.number)))
+       .then(res => {
+         dispatch(getOrderNumber(res.order.number));
+         dispatch(clearConstructor())
+       })
        .catch (err =>  console.error('Error fetching data: ', err))
 }
 }
