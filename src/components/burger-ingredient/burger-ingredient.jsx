@@ -46,7 +46,7 @@ const BurgerIngredient = ({item: ingredient, ingredientDetailsHandler}) => {
   );
 };
 BurgerIngredient.propTypes = {
-  ingredientPropType,
+  item: ingredientPropType,
   ingredientDetailsHandler: PropTypes.func
 }
 export default BurgerIngredient;
