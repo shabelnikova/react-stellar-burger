@@ -1,16 +1,14 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import styles from "../burger-ingredient/burger-ingredient.module.css";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from 'classnames';
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import {ingredientPropType} from "../../utils/prop-types";
 import {useDrag} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
-import {showIngredientInfo} from "../../services/actions/ingredient-details-action";
+import PropTypes from "prop-types";
 
-const BurgerIngredient = ({item: ingredient}) => {
-  const [isActive, setActive] = useState(false);
+
+const BurgerIngredient = ({item: ingredient, ingredientDetailsHandler}) => {
   const {items, bun} = useSelector(state => state.burgerConstructor)
   const dispatch = useDispatch();
 
@@ -32,13 +30,9 @@ const BurgerIngredient = ({item: ingredient}) => {
       isDrag: monitor.isDragging()
     })
   })
-  const ingredientDetailsHandler = () => {
-    setActive(true);
-    dispatch(showIngredientInfo(ingredient));
-  }
+
   return (
-          <>
-            <div ref={dragRef} onClick={ingredientDetailsHandler}
+            <div ref={dragRef} onClick={() => ingredientDetailsHandler(ingredient)}
                  className={cn(styles.card, 'pl-4 pr-4')} style={{opacity: isDrag ? .2 : 1}}>
               <img className={cn(styles.cards__img)} src={ingredient.image} alt={ingredient.name}/>
               <div className={cn(styles.card__price, 'text text_type_digits-default')}>
@@ -49,13 +43,10 @@ const BurgerIngredient = ({item: ingredient}) => {
                 '')}>{ingredient.name}</p>
               {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
             </div>
-            {isActive && <Modal isActive={isActive} setActive={setActive}>
-              <IngredientDetails />
-            </Modal>}
-          </>
   );
 };
 BurgerIngredient.propTypes = {
-  ingredientPropType
+  ingredientPropType,
+  ingredientDetailsHandler: PropTypes.func
 }
 export default BurgerIngredient;

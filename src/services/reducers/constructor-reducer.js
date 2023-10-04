@@ -1,4 +1,4 @@
-import {ADD_ITEM, DELETE_ITEM, MOVE_ITEM} from "../actions/constructor-action";
+import {ADD_ITEM, CLEAR_CONSTRUCTOR, DELETE_ITEM, MOVE_ITEM} from "../actions/constructor-action";
 const initialState = {
   items: [],
   bun: null,
@@ -33,6 +33,13 @@ export const constructorReducer = (state = initialState, action) => {
       return {
         ...state,
         items: copyArray
+      }
+    }
+    case CLEAR_CONSTRUCTOR: {
+      return {
+        ...state,
+        items: [],
+        bun: null,
       }
     }
     default:

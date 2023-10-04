@@ -1,5 +1,8 @@
-import {orderUrl, url} from "../../utils/data"
+import {request} from "../../utils/api";
+
+
 export const GET_ORDER = 'GET_ORDER';
+export const RESET_ORDER_NUMBER = 'RESET_ORDER_NUMBER'
 export const getOrderNumber = (number) => {
   return {
     type: GET_ORDER,
@@ -8,15 +11,19 @@ export const getOrderNumber = (number) => {
 }
 export const getOrderResponse = (array) => {
 return (dispatch, getState) => {
-  fetch(orderUrl,
+  request('orders',
     {method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         ingredients: array
       })
     })
-    .then(res => res.ok ? res.json() : res.json().then(error => Promise.reject(error)))
        .then(res => dispatch(getOrderNumber(res.order.number)))
        .catch (err =>  console.error('Error fetching data: ', err))
 }
+}
+export const resetOrderNumber = () => {
+  return {
+    type: RESET_ORDER_NUMBER
+  }
 }

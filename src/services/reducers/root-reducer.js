@@ -5,9 +5,11 @@ import {orderReducer} from "./order-reducer";
 import {ingredientDetailsReducer} from "./ingredient-details-reducer";
 
 
+
  export const rootReducer = combineReducers({
    ingredients: ingredientsReducer,
    burgerConstructor: constructorReducer,
    orderDetails: orderReducer,
-   ingredientDetails: ingredientDetailsReducer
+   ingredientDetails: ingredientDetailsReducer,
+
 })

@@ -1,4 +1,4 @@
-import {GET_ORDER} from "../actions/order-action";
+import {GET_ORDER, RESET_ORDER_NUMBER} from "../actions/order-action";
 
 const initialState = {
   orderNumber: 0
@@ -9,6 +9,12 @@ export const orderReducer = (state = initialState, action) => {
       return {
         ...state,
         orderNumber: action.payload
+      }
+    }
+    case RESET_ORDER_NUMBER: {
+      return {
+        ...state,
+        orderNumber: 0
       }
     }
     default:

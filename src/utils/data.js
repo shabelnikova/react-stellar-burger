@@ -1,6 +1,4 @@
 
-export const url = 'https://norma.nomoreparties.space/api/ingredients';
-export const orderUrl = 'https://norma.nomoreparties.space/api/orders';
 export const data = [
   {
      "_id":"60666c42cc7b410027a1a9b1",

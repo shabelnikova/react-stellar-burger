@@ -38,6 +38,11 @@ const BurgerConstructor = () => {
     })
   })
 
+  const orderHandler = () => {
+    setActive(true);
+
+  }
+
   // const isBun = itemDrag?.type === 'bun';
   // const isIngredient = itemDrag?.type !== 'bun';
 
@@ -75,7 +80,7 @@ const BurgerConstructor = () => {
         />
       </div>}
       <div className={cn(styles.burger__order, 'mt-10')}>
-        <Button onClick={() => setActive(true)} htmlType="button" type="primary" size="large" >
+        <Button disabled={!bun} onClick={orderHandler} htmlType="button" type="primary" size="large" >
           Оформить заказ
         </Button>
         <div className={cn(styles.burger__price, 'mr-10')}>

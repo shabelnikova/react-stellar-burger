@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from '../modal/modal.module.css'
 import cn from 'classnames';
 
-import {ingredientPropType} from "../../utils/prop-types";
-import PropTypes from "prop-types";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {clearIngredientInfo, showIngredientInfo} from "../../services/actions/ingredient-details-action";
 
 const IngredientDetails = () => {
   const {ingredient} = useSelector(state => state.ingredientDetails);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    return () => dispatch(clearIngredientInfo());
+  })
 
   return (
     <div className='pt-15 pb-15 pl-10 pr-10' onClick={e => e.stopPropagation()}>
@@ -43,8 +46,5 @@ const IngredientDetails = () => {
 
   );
 };
-IngredientDetails.propTypes = {
-  ingredientPropType,
-  onClose: PropTypes.func
-}
+
 export default IngredientDetails;

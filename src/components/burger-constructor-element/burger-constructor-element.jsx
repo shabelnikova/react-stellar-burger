@@ -59,7 +59,6 @@ const BurgerConstructorElement = ({item, index}) => {
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref))
   return (
-    <>
       <li ref={ref} style={{opacity}} className={cn(styles.burger__item, 'mb-4 mr-2 ml-4')} >
         <DragIcon type="primary" />
         <ConstructorElement
@@ -68,7 +67,6 @@ const BurgerConstructorElement = ({item, index}) => {
           price={item.price}
           handleClose={() => dispatch(deleteItem(index))}/>
       </li>
-    </>
   );
 };
 BurgerConstructorElement.propTypes = {

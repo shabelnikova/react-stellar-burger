@@ -1,4 +1,5 @@
-import {url} from "../../utils/data";
+import {request} from "../../utils/api";
+
 
 export const ADD_ITEMS = 'ADD_ITEMS';
 export const addItems = (items) => {
@@ -9,8 +10,7 @@ export const addItems = (items) => {
 }
 export const getAllItems = () => {
   return (dispatch, getState) => {
-    fetch(url)
-      .then(res => res.ok ? res.json() : res.json().then(error => Promise.reject(error)))
+    request('ingredients')
       .then(res => dispatch(addItems(res.data)))
       .catch (err =>  console.error('Error fetching data: ', err))
   }
