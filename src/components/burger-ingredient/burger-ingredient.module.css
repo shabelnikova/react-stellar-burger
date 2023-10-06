@@ -21,3 +21,9 @@
 .card__description {
     text-align: center;
 }
+.isActive {
+    display: block;
+}
+.isNotActive {
+    display: none;
+}

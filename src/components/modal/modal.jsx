@@ -9,17 +9,22 @@ import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 const modalRoot = document.querySelector('#modal-root');
 const Modal = ({children, setActive}) => {
   const element = useMemo(() => document.createElement('div'), []);
-  const closePopup = (e) => {
-    if(e.key === 'Escape') {
-      setActive(false);
-    }
+
+  const closePopup = () => {
+    setActive(false)
   }
+
   useEffect(() => {
+    const closePopupByEscape = (e) => {
+      if(e.key === 'Escape') {
+        closePopup();
+      }
+    }
     modalRoot.appendChild(element)
-    document.addEventListener('keydown', (closePopup))
+    document.addEventListener('keydown', (closePopupByEscape))
   return () => {
     modalRoot.removeChild(element);
-    document.removeEventListener('keydown', (closePopup));
+    document.removeEventListener('keydown', (closePopupByEscape));
   }
 
   }, [])
@@ -27,11 +32,11 @@ const Modal = ({children, setActive}) => {
     <>
       <div className={cn(styles.modal)}>
         <div className={cn(styles.modal__closeIcon)}>
-          <CloseIcon type="primary" onClick={() => setActive(false)}/>
+          <CloseIcon type="primary" onClick={() => {closePopup()}}/>
         </div>
         {children}
       </div>
-      <ModalOverlay setActive={setActive}/>
+      <ModalOverlay closePopup={closePopup}/>
     </>, element
   );
 };

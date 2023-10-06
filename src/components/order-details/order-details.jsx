@@ -1,10 +1,21 @@
 import styles from '../modal/modal.module.css'
 import cn from "classnames";
-import React from 'react';
-import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, {useEffect} from 'react';
 import orderImage from '../../images/done.png'
+import {useDispatch, useSelector} from "react-redux";
+import {getOrderResponse, resetOrderNumber} from "../../services/actions/order-action";
+import {clearConstructor} from "../../services/actions/constructor-action";
 
 const OrderDetails = () => {
+  const dispatch = useDispatch();
+  const {items, bun} = useSelector(state => state.burgerConstructor);
+  const {orderNumber} = useSelector(state => state.orderDetails);
+  const idArray = items?.map(el => el._id);
+  idArray.push(bun?._id);
+  useEffect(() => {
+    dispatch(getOrderResponse(idArray));
+    return () => dispatch(resetOrderNumber())
+  }, [])
 
   return (
      <div className='pt-15  pb-30 pl-10 pr-10' onClick={e => e.stopPropagation()}>
@@ -12,7 +23,7 @@ const OrderDetails = () => {
          <p className={ "text text_type_main-large"}></p>
        </div>
      <div className={cn(styles.modal__info)}>
-       <p className="text text_type_digits-large mb-8">367890</p>
+       <p className="text text_type_digits-large mb-8">{orderNumber === 0 ? 'Wait...' : orderNumber}</p>
        <p className="text text_type_main-medium">
          идентификатор заказа
        </p>

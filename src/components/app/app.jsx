@@ -1,31 +1,31 @@
 import styles from "./app.module.css";
-import { data } from "../../utils/data";
-import {useEffect, useState} from "react";
+
+import React, {useEffect, useState} from "react";
 import AppHeader from "../app-header/app-header";
 import cn from 'classnames';
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
+import {useDispatch} from "react-redux";
+import {getAllItems} from "../../services/actions/ingredients-action";
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import {showIngredientInfo} from "../../services/actions/ingredient-details-action";
+
 
 function App() {
-  const url = 'https://norma.nomoreparties.space/api/ingredients';
-  const [ingredients, setIngredients] = useState({data});
-  useEffect(() => {
-    const serverData = async() => {
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-      }
-        const result = await response.json();
-        setIngredients(result);
+  const dispatch = useDispatch();
+  const [isActive, setActive] = useState(false);
 
-    } catch (err) {
-        console.error('Error fetching data:', err);
-      }
-    }
-    serverData();
+  useEffect(() => {
+    dispatch(getAllItems())
 
   }, []);
+  const ingredientDetailsHandler = (ingredient) => {
+    setActive(true);
+    dispatch(showIngredientInfo(ingredient));
+  }
 
    return (
     <div className={styles.app}>
@@ -34,9 +34,14 @@ function App() {
         <h1 className={ 'text text_type_main-large mt-10'}>Соберите бургер</h1>
       </div>
       <main className={cn(styles.main)}>
-        <BurgerIngredients burgerData={ingredients.data} />
-        <BurgerConstructor burgerData={ingredients.data} />
+        <DndProvider backend={HTML5Backend}>
+          <BurgerIngredients ingredientDetailsHandler={ingredientDetailsHandler}/>
+          <BurgerConstructor />
+        </DndProvider>
       </main>
+      {isActive && <Modal setActive={setActive}>
+        <IngredientDetails />
+      </Modal>}
     </div>
   );
 }
