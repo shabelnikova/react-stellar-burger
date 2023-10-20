@@ -14,7 +14,7 @@ export const getOrderResponse = (array) => {
 return (dispatch, getState) => {
   request('orders',
     {method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json', "Accept": 'application/json'},
       body: JSON.stringify({
         ingredients: array
       })

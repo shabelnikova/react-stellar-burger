@@ -7,12 +7,9 @@ import PropTypes from "prop-types";
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 const modalRoot = document.querySelector('#modal-root');
-const Modal = ({children, setActive}) => {
+const Modal = ({children, closePopup}) => {
   const element = useMemo(() => document.createElement('div'), []);
 
-  const closePopup = () => {
-    setActive(false)
-  }
 
   useEffect(() => {
     const closePopupByEscape = (e) => {
@@ -32,7 +29,7 @@ const Modal = ({children, setActive}) => {
     <>
       <div className={cn(styles.modal)}>
         <div className={cn(styles.modal__closeIcon)}>
-          <CloseIcon type="primary" onClick={() => {closePopup()}}/>
+          <CloseIcon type="primary" onClick={closePopup}/>
         </div>
         {children}
       </div>

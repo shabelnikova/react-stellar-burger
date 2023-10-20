@@ -8,7 +8,7 @@ import {useInView} from "react-intersection-observer";
 import PropTypes from "prop-types";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
-const BurgerIngredientsCategory = ({setCurrentTab, ingredientDetailsHandler}) => {
+const BurgerIngredientsCategory = ({setCurrentTab}) => {
   const {data} = useSelector(state => state.ingredients)
   const buns = data.filter(el => el.type === 'bun');
   const mains = data.filter(el => el.type  === 'main');
@@ -37,19 +37,19 @@ const BurgerIngredientsCategory = ({setCurrentTab, ingredientDetailsHandler}) =>
       <div id='buns' ref={bunsRef}>
         <h2 className={ "text text_type_main-medium mb-6"}>Булки</h2>
         <div className={cn(styles.cards__gallery, 'pl-4 pr-4')} >
-          {buns.map((item) => <BurgerIngredient ingredientDetailsHandler={ingredientDetailsHandler} key={item._id} item={item}/>)}
+          {buns.map((item) => <BurgerIngredient key={item._id} item={item} id={item._id}/>)}
         </div>
       </div>
      <div id='sauces' ref={saucesRef}>
        <h2 className={ "text text_type_main-medium mb-6"}>Соусы</h2>
        <div className={cn(styles.cards__gallery, 'pl-4 pr-4')}>
-         {sauces.map((item) => <BurgerIngredient ingredientDetailsHandler={ingredientDetailsHandler} key={item._id} item={item}/>)}
+         {sauces.map((item) => <BurgerIngredient key={item._id} item={item} id={item._id}/>)}
        </div>
      </div>
       <div id='mains' ref={mainsRef}>
         <h2 className={ "text text_type_main-medium mb-6"}>Начинки</h2>
         <div className={cn(styles.cards__gallery, 'pl-4 pr-4')}>
-          {mains.map((item) => <BurgerIngredient ingredientDetailsHandler={ingredientDetailsHandler} key={item._id} item={item}/>)}
+          {mains.map((item) => <BurgerIngredient key={item._id} item={item} id={item._id}/>)}
         </div>
       </div>
     </>

@@ -6,11 +6,14 @@ import {ingredientPropType} from "../../utils/prop-types";
 import {useDrag} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
 import PropTypes from "prop-types";
+import {Link, useLocation, useParams} from "react-router-dom";
+import {showIngredientInfo} from "../../services/actions/ingredient-details-action";
 
 
-const BurgerIngredient = ({item: ingredient, ingredientDetailsHandler}) => {
+const BurgerIngredient = ({item: ingredient,  id}) => {
   const {items, bun} = useSelector(state => state.burgerConstructor)
   const dispatch = useDispatch();
+  const location = useLocation()
 
   const count = useMemo(() => {
     let res = 0;
@@ -30,11 +33,22 @@ const BurgerIngredient = ({item: ingredient, ingredientDetailsHandler}) => {
       isDrag: monitor.isDragging()
     })
   })
+  const ingredientDetailsHandler = (ingredient) => {
+    dispatch(showIngredientInfo(ingredient));
+  }
 
   return (
-            <div ref={dragRef} onClick={() => ingredientDetailsHandler(ingredient)}
-                 className={cn(styles.card, 'pl-4 pr-4')} style={{opacity: isDrag ? .2 : 1}}>
-              <img className={cn(styles.cards__img)} src={ingredient.image} alt={ingredient.name}/>
+            <Link
+              to={`/ingredients/${id}`}
+              state={{background: location}}
+              replace
+              ref={dragRef}
+              onClick={() => ingredientDetailsHandler(ingredient)}
+              className={cn(styles.card, 'pl-4 pr-4')}
+              style={{opacity: isDrag ? .2 : 1}}>
+              <img className={cn(styles.cards__img)}
+                   src={ingredient.image}
+                   alt={ingredient.name}/>
               <div className={cn(styles.card__price, 'text text_type_digits-default')}>
                 <p className={cn(styles.card__digits)}>{ingredient.price}</p>
                 <CurrencyIcon type={"primary"}/>
@@ -42,7 +56,7 @@ const BurgerIngredient = ({item: ingredient, ingredientDetailsHandler}) => {
               <p className={cn(styles.card__description, 'text text_type_main-default' +
                 '')}>{ingredient.name}</p>
               {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
-            </div>
+            </Link>
   );
 };
 BurgerIngredient.propTypes = {

@@ -1,20 +1,18 @@
 import styles from './burger-constructor.module.css'
 import cn from 'classnames';
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import Modal from "../modal/modal";
 import React, {useMemo, useState} from "react";
-import OrderDetails from "../order-details/order-details";
 import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {addItem} from "../../services/actions/constructor-action";
 import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
+import {Link, useLocation} from "react-router-dom";
 
 const BurgerConstructor = () => {
   const [isActive, setActive] = useState(false);
-
+  const location = useLocation();
   const dispatch = useDispatch();
   const {items, bun} = useSelector(state => state.burgerConstructor);
-
   const totalPrice = useMemo(() => {
     let res = 0;
     if (bun) {
@@ -38,10 +36,6 @@ const BurgerConstructor = () => {
     })
   })
 
-  const orderHandler = () => {
-    setActive(true);
-
-  }
 
   // const isBun = itemDrag?.type === 'bun';
   // const isIngredient = itemDrag?.type !== 'bun';
@@ -80,18 +74,18 @@ const BurgerConstructor = () => {
         />
       </div>}
       <div className={cn(styles.burger__order, 'mt-10')}>
-        <Button disabled={!bun} onClick={orderHandler} htmlType="button" type="primary" size="large" >
-          Оформить заказ
-        </Button>
+          <Link to={'/order'} state={{background: location}} replace>
+            <Button disabled={!bun}  htmlType="button" type="primary" size="large" >
+              Оформить заказ
+            </Button>
+          </Link>
         <div className={cn(styles.burger__price, 'mr-10')}>
           <p className="text text_type_digits-medium">{totalPrice}</p>
           <CurrencyIcon type="primary" />
         </div>
       </div>
     </section>
-    {isActive && <Modal isActive={isActive} setActive={setActive}>
-      <OrderDetails />
-    </Modal>}
+
   </>;
 };
 

@@ -4,12 +4,15 @@ import React, {useEffect} from 'react';
 import orderImage from '../../images/done.png'
 import {useDispatch, useSelector} from "react-redux";
 import {getOrderResponse, resetOrderNumber} from "../../services/actions/order-action";
-import {clearConstructor} from "../../services/actions/constructor-action";
+import {useLocation} from "react-router-dom";
+
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
+
   const {items, bun} = useSelector(state => state.burgerConstructor);
   const {orderNumber} = useSelector(state => state.orderDetails);
+
   const idArray = items?.map(el => el._id);
   idArray.push(bun?._id);
   useEffect(() => {

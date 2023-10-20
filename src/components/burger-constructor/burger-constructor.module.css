@@ -1,5 +1,6 @@
 .burger__constructor {
-    min-width: 600px;
+    max-width: 600px;
+    width: 100%;
 }
 .burger__list {
     list-style-type: none;
