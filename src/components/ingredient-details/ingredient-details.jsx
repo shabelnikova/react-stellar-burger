@@ -9,7 +9,7 @@ import {clearIngredientInfo, ingredientsRequest} from "../../services/slice/ingr
 const IngredientDetails = () => {
 
   const dispatch = useDispatch();
-  const {data, isLoading} = useSelector(state => state.ingredients);
+  const {data, isLoading} = useSelector(state => state.ingredientsSlice);
   const {id} = useParams();
 
   useEffect(() => {
