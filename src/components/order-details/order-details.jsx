@@ -3,20 +3,18 @@ import cn from "classnames";
 import React, {useEffect} from 'react';
 import orderImage from '../../images/done.png'
 import {useDispatch, useSelector} from "react-redux";
-import {getOrderResponse, resetOrderNumber} from "../../services/actions/order-action";
-import {useLocation} from "react-router-dom";
-
+import {orderNumberRequest, resetOrderNumber} from "../../services/slice/orderSlice";
 
 const OrderDetails = () => {
   const dispatch = useDispatch();
 
-  const {items, bun} = useSelector(state => state.burgerConstructor);
-  const {orderNumber} = useSelector(state => state.orderDetails);
+  const {items, bun} = useSelector(state => state.constructorSlice);
+  const {orderNumber, isLoading} = useSelector(state => state.orderSlice);
 
   const idArray = items?.map(el => el._id);
   idArray.push(bun?._id);
   useEffect(() => {
-    dispatch(getOrderResponse(idArray));
+    dispatch(orderNumberRequest(idArray));
     return () => dispatch(resetOrderNumber())
   }, [])
 
@@ -26,7 +24,7 @@ const OrderDetails = () => {
          <p className={ "text text_type_main-large"}></p>
        </div>
      <div className={cn(styles.modal__info)}>
-       <p className="text text_type_digits-large mb-8">{orderNumber === 0 ? 'Wait...' : orderNumber}</p>
+       <p className="text text_type_digits-large mb-8">{isLoading ? 'Wait...' : orderNumber}</p>
        <p className="text text_type_main-medium">
          идентификатор заказа
        </p>

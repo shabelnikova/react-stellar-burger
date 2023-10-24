@@ -7,11 +7,12 @@ import {useDrag} from "react-dnd";
 import {useDispatch, useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import {Link, useLocation, useParams} from "react-router-dom";
-import {showIngredientInfo} from "../../services/actions/ingredient-details-action";
+import {showIngredientInfo} from "../../services/slice/ingredientsSlice";
+
 
 
 const BurgerIngredient = ({item: ingredient,  id}) => {
-  const {items, bun} = useSelector(state => state.burgerConstructor)
+  const {items, bun} = useSelector(state => state.constructorSlice)
   const dispatch = useDispatch();
   const location = useLocation()
 
@@ -60,7 +61,7 @@ const BurgerIngredient = ({item: ingredient,  id}) => {
   );
 };
 BurgerIngredient.propTypes = {
-  item: ingredientPropType,
-  ingredientDetailsHandler: PropTypes.func
+  ingredient: ingredientPropType,
+  id: PropTypes.string,
 }
 export default BurgerIngredient;

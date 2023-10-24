@@ -4,15 +4,15 @@ import cn from "classnames";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {registrationQuery} from "../services/actions/register-action";
-import {setAccessToken, setRefreshToken} from "../utils/token";
+
+import {registerUserRequest} from "../services/slice/userSlice";
 
 
 const RegisterPage = () => {
 
 
   const dispatch = useDispatch();
-  const userData = useSelector(state => state.registerReducer)
+  const userData = useSelector(state => state.userSlice)
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const onChange = e => {
@@ -25,17 +25,17 @@ const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {userName, password, email} = user;
-    if(!userName || !password || !email)
+    const {name, password, email} = user;
+    if(!name || !password || !email)
       return;
-    dispatch(registrationQuery(userName, email, password));
+    dispatch(registerUserRequest({name, email, password}));
 
   }
 
   useEffect(()=>{
     if(userData.success) {
-      setAccessToken(userData.accessToken);
-      setRefreshToken(userData.refreshToken);
+      // setAccessToken(userData.accessToken);
+      // setRefreshToken(userData.refreshToken);
       navigate('/')
     }
     console.log(userData)
@@ -48,8 +48,8 @@ const RegisterPage = () => {
         type={'text'}
         placeholder={'Имя'}
         onChange={onChange}
-        value={user.userName || ''}
-        name={'userName'}
+        value={user.name || ''}
+        name={'name'}
         error={false}
         errorText={'Ошибка'}
         size={'default'}

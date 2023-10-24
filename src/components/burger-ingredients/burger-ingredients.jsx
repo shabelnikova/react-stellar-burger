@@ -3,7 +3,6 @@ import cn from 'classnames';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import {useState} from "react";
 import BurgerIngredientsCategory from "../burger-ingredients-category/burger-ingredients-category";
-import PropTypes from "prop-types";
 
 const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState('buns')
@@ -28,8 +27,4 @@ const BurgerIngredients = () => {
     </section>
   )
 }
-BurgerIngredients.propTypes = {
-  ingredientDetailsHandler: PropTypes.func
-}
-
 export default BurgerIngredients;

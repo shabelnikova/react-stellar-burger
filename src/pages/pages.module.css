@@ -22,11 +22,20 @@
     gap: 40px;
     list-style-type: none;
     padding: 0;
-    width: 320px;
+    max-width: 320px;
+    width: 100%;
     margin: 10px 60px 0 0;
 }
 .profile_listEl {
     display: flex;
     align-items: center;
     cursor: pointer;
+    text-decoration: none;
+    color: var(--text-primary-color);
+}
+.profile_buttons {
+    max-width: 480px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }

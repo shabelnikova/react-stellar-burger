@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import cn from "classnames";
 import styles from "./pages.module.css";
-import {Link} from "react-router-dom";
-import {restorePasswordRequest} from "../services/actions/restore-password-action";
+import {Link, useNavigate} from "react-router-dom";
+import {resetPasswordRequest} from "../services/slice/userSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 const ResetPasswordPage = () => {
-
-  const inputSecretCode = React.useRef(null)
-  const [passwordReset, setPasswordReset] = useState({})
+  const [passwordReset, setPasswordReset] = useState({});
+  const isPasswordChanged = useSelector(state => state.userSlice.passwordReset);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onChange = e => {
     const {name, value} = e.target
     setPasswordReset({
@@ -18,14 +20,17 @@ const ResetPasswordPage = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault();
-    const [password, code] = passwordReset;
-    restorePasswordRequest(password, code);
+    dispatch(resetPasswordRequest(passwordReset));
   }
+  useEffect(() => {
+    if(isPasswordChanged)
+      navigate('/login');
+  }, [isPasswordChanged])
   return (
     <form className={cn(styles.form_wrapper)} onSubmit={handleSubmit}>
       <h2 className="text text_type_main-medium">Восстановление пароля</h2>
       <PasswordInput
-        value={passwordReset.password}
+        value={passwordReset.password || ''}
         onChange={onChange}
         name={'password'}
         placeholder="Введите новый пароль"
@@ -35,10 +40,9 @@ const ResetPasswordPage = () => {
         type={'text'}
         placeholder={'Введите код из письма'}
         onChange={onChange}
-        value={passwordReset.code}
-        name={'code'}
+        value={passwordReset.token || ''}
+        name={'token'}
         error={false}
-        ref={inputSecretCode}
         errorText={'Ошибка'}
         size={'default'}
         extraClass="mt-6"

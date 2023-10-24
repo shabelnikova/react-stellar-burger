@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import styles from '../modal/modal.module.css'
 import cn from 'classnames';
 import {useDispatch, useSelector} from "react-redux";
-import {clearIngredientInfo} from "../../services/actions/ingredient-details-action";
 import {useParams} from "react-router-dom";
-import {getAllItems} from "../../services/actions/ingredients-action";
+import {clearIngredientInfo, ingredientsRequest} from "../../services/slice/ingredientsSlice";
 
 
 const IngredientDetails = () => {
@@ -14,11 +13,11 @@ const IngredientDetails = () => {
   const {id} = useParams();
 
   useEffect(() => {
-    dispatch(getAllItems())
+    dispatch(ingredientsRequest());
     return () => dispatch(clearIngredientInfo());
   }, []);
 if(isLoading) {
-  return <h1 className={cn(styles.preloader)}>Wait...</h1>
+  return <h1 className={cn(styles.preloader)}>Loading...</h1>
 } else {
   const ingredient = data.find((el) => el._id === id);
   return(

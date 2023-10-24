@@ -4,6 +4,7 @@ import styles from './pages.module.css'
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
+import {authUserRequest} from "../services/slice/userSlice";
 const LoginPage = () => {
   const [userData, setUserData] = useState({});
   const dispatch = useDispatch()
@@ -20,8 +21,9 @@ const LoginPage = () => {
     if(!email || !password) {
       return;
     }
-    // dispatch()
+    dispatch(authUserRequest({email, password}));
   }
+
   return (
     <form className={cn(styles.form_wrapper)} onSubmit={handleSubmit}>
       <h2 className="text text_type_main-medium">Вход</h2>
