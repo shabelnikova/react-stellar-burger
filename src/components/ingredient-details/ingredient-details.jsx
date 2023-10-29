@@ -1,22 +1,30 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from '../modal/modal.module.css'
 import cn from 'classnames';
-
 import {useDispatch, useSelector} from "react-redux";
-import {clearIngredientInfo, showIngredientInfo} from "../../services/actions/ingredient-details-action";
+import {useParams} from "react-router-dom";
+import {clearIngredientInfo, ingredientsRequest} from "../../services/slice/ingredientsSlice";
+
 
 const IngredientDetails = () => {
-  const {ingredient} = useSelector(state => state.ingredientDetails);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    return () => dispatch(clearIngredientInfo());
-  })
 
-  return (
+  const dispatch = useDispatch();
+  const {data, isLoading} = useSelector(state => state.ingredientsSlice);
+  const {id} = useParams();
+
+  useEffect(() => {
+    dispatch(ingredientsRequest());
+    return () => dispatch(clearIngredientInfo());
+  }, []);
+if(isLoading) {
+  return <h1 className={cn(styles.preloader)}>Loading...</h1>
+} else {
+  const ingredient = data.find((el) => el._id === id);
+  return(
+
     <div className='pt-15 pb-15 pl-10 pr-10' onClick={e => e.stopPropagation()}>
       <div className={cn(styles.modal__header)}>
-        <p className={ "text text_type_main-large" }>Детали ингредиента</p>
-
+        <p className={ "text text_type_main-large"}>Детали ингредиента</p>
       </div>
       <div className={cn(styles.modal__info)}>
         <img src={ingredient.image_large} alt={ingredient.name} className='mb-4'/>
@@ -45,6 +53,13 @@ const IngredientDetails = () => {
     </div>
 
   );
+}
+
+
+
+
+
+
 };
 
 export default IngredientDetails;

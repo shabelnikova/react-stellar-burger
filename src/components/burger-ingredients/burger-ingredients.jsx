@@ -3,9 +3,8 @@ import cn from 'classnames';
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import {useState} from "react";
 import BurgerIngredientsCategory from "../burger-ingredients-category/burger-ingredients-category";
-import PropTypes from "prop-types";
 
-const BurgerIngredients = ({ingredientDetailsHandler}) => {
+const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState('buns')
   const onClickTab = (tab) => {
     setCurrentTab(tab);
@@ -23,13 +22,9 @@ const BurgerIngredients = ({ingredientDetailsHandler}) => {
         <Tab active={currentTab === 'mains'} value={'mains'} onClick={onClickTab}>Начинки</Tab>
       </div>
       <div className={cn(styles.scroll__container)}>
-        <BurgerIngredientsCategory setCurrentTab={setCurrentTab} ingredientDetailsHandler={ingredientDetailsHandler}/>
+        <BurgerIngredientsCategory setCurrentTab={setCurrentTab} />
       </div>
     </section>
   )
 }
-BurgerIngredients.propTypes = {
-  ingredientDetailsHandler: PropTypes.func
-}
-
 export default BurgerIngredients;

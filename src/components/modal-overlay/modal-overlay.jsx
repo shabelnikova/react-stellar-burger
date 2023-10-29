@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const ModalOverlay = ({closePopup}) => {
 
   return (
-    <div onClick={() => {closePopup()}} className={styles.overlay}>
+    <div onClick={closePopup} className={styles.overlay}>
 
     </div>
   );
