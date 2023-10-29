@@ -3,24 +3,24 @@ import {Button, EmailInput} from "@ya.praktikum/react-developer-burger-ui-compon
 import cn from "classnames";
 import styles from "./pages.module.css";
 import {Link, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
 import {forgotPasswordRequest} from "../services/slice/userSlice";
-
-
+import {useAppDispatch, useAppSelector} from "../services/hooks";
 
 const ForgotPasswordPage = () => {
   const [valueEmail, setValueEmail] = useState('');
-  const dispatch = useDispatch();
-  const isPasswordForgot = useSelector(state => state.userSlice.passwordForgot);
+  const dispatch = useAppDispatch();
+  const isPasswordForgot = useAppSelector((state) => state.userSlice.passwordForgot);
   const navigate = useNavigate();
   const emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueEmail(e.target.value)
+
   }
-  const sendEmail = (e) => {
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isEmailValid = emailPattern.test(valueEmail);
     if(isEmailValid) {
+
       dispatch(forgotPasswordRequest(valueEmail));
     }
   }

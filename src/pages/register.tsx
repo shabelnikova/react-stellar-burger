@@ -3,42 +3,33 @@ import styles from './pages.module.css'
 import cn from "classnames";
 import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-
 import {registerUserRequest} from "../services/slice/userSlice";
-
+import {useAppDispatch, useAppSelector} from "../services/hooks";
+import {IInputRegisterUpdate} from "../services/types";
 
 const RegisterPage = () => {
-
-
-  const dispatch = useDispatch();
-  const userData = useSelector(state => state.userSlice)
-  const [user, setUser] = useState({});
+  const dispatch = useAppDispatch();
+  const userData = useAppSelector(state => state.userSlice)
+  const [user, setUser] = useState<IInputRegisterUpdate>({name: '', email: '', password: ''} );
   const navigate = useNavigate();
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target
     setUser({
       ...user,
       [name]: value
     })
   }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const {name, password, email} = user;
     if(!name || !password || !email)
       return;
     dispatch(registerUserRequest({name, email, password}));
-
   }
-
   useEffect(()=>{
-    if(userData.success) {
-      // setAccessToken(userData.accessToken);
-      // setRefreshToken(userData.refreshToken);
+    if(userData.isUserLoaded) {
       navigate('/')
     }
-    console.log(userData)
   }, [userData])
 
   return (
@@ -81,7 +72,6 @@ const RegisterPage = () => {
           </Button>
         </Link>
       </div>
-
     </form>
   );
 };

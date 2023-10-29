@@ -4,27 +4,37 @@ import cn from "classnames";
 import styles from "./pages.module.css";
 import {Link, useNavigate} from "react-router-dom";
 import {resetPasswordRequest} from "../services/slice/userSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector} from "../services/hooks";
+import {IChangePasswordRequest} from "../services/types";
 
 const ResetPasswordPage = () => {
-  const [passwordReset, setPasswordReset] = useState({});
-  const isPasswordChanged = useSelector(state => state.userSlice.passwordReset);
+  const [passwordReset, setPasswordReset] = useState<IChangePasswordRequest>({password: '', token: ''});
+  const isPasswordChanged = useAppSelector(state => state.userSlice.passwordReset);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const onChange = e => {
+  const dispatch = useAppDispatch();
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target
     setPasswordReset({
       ...passwordReset,
       [name]: value
     })
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(resetPasswordRequest(passwordReset));
   }
   useEffect(() => {
-    if(isPasswordChanged)
+    if(!localStorage.getItem('checkForgotPasswordVisited')) {
       navigate('/login');
+    }
+  }, [])
+
+  useEffect(() => {
+
+    if(isPasswordChanged) {
+      navigate('/login');
+    }
+
   }, [isPasswordChanged])
   return (
     <form className={cn(styles.form_wrapper)} onSubmit={handleSubmit}>

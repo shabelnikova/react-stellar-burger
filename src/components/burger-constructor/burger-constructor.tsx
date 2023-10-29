@@ -2,18 +2,18 @@ import styles from './burger-constructor.module.css'
 import cn from 'classnames';
 import {Button, ConstructorElement, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {useMemo} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import BurgerConstructorElement from "../burger-constructor-element/burger-constructor-element";
 import {useLocation, useNavigate} from "react-router-dom";
 import {addItem} from "../../services/slice/constructorSlice";
-
+import {useAppDispatch, useAppSelector} from "../../services/hooks";
+import {IIngredientType} from "../../utils/types";
 
 const BurgerConstructor = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const {items, bun} = useSelector(state => state.constructorSlice);
-  const {isUserLoaded} = useSelector(state => state.userSlice);
+  const dispatch = useAppDispatch();
+  const {items, bun} = useAppSelector(state => state.constructorSlice);
+  const {isUserLoaded} = useAppSelector(state => state.userSlice);
   const navigate = useNavigate();
   const totalPrice = useMemo(() => {
     let res = 0;
@@ -29,7 +29,7 @@ const BurgerConstructor = () => {
   const [{isOver, canDrop, itemDrag}, dropTarget] = useDrop({
     accept: 'ingredient',
 
-    drop: (item) => (
+    drop: (item: IIngredientType) => (
       dispatch(addItem(item))
     ),
     collect: (monitor) => ({
@@ -86,7 +86,7 @@ const onClickHandler = () => {
         </div>}
         <div className={cn(styles.burger__order, 'mt-10')}>
 
-          <Button disabled={!bun && items} onClick={onClickHandler} htmlType="button" type="primary" size="large" >
+          <Button disabled={bun === null || items.length < 1} onClick={onClickHandler} htmlType="button" type="primary" size="large" >
             Оформить заказ
           </Button>
 

@@ -2,13 +2,14 @@ import React, {useEffect} from 'react';
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import styles from './burger-ingredients-category.module.css';
 import cn from 'classnames';
-import {useSelector} from "react-redux";
 import {useInView} from "react-intersection-observer";
-import PropTypes from "prop-types";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import {useAppSelector} from "../../services/hooks";
 
-const BurgerIngredientsCategory = ({setCurrentTab}) => {
-  const {data, isLoading} = useSelector(state => state.ingredientsSlice)
+interface IProps {
+  setCurrentTab(tab: string): void
+}
+const BurgerIngredientsCategory = ({setCurrentTab}: IProps) => {
+  const {data, isLoading} = useAppSelector(state => state.ingredientsSlice)
   const buns = data.filter(el => el.type === 'bun');
   const mains = data.filter(el => el.type  === 'main');
   const sauces = data.filter(el => el.type  === 'sauce');
@@ -56,7 +57,5 @@ const BurgerIngredientsCategory = ({setCurrentTab}) => {
       </>
   );
 };
-IngredientDetails.propTypes = {
-  setCurrentTab: PropTypes.func,
-}
+
 export default BurgerIngredientsCategory;

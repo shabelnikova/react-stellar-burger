@@ -2,20 +2,22 @@ import styles from '../modal/modal.module.css'
 import cn from "classnames";
 import React, {useEffect} from 'react';
 import orderImage from '../../images/done.png'
-import {useDispatch, useSelector} from "react-redux";
-import {orderNumberRequest, resetOrderNumber} from "../../services/slice/orderSlice";
+import {orderNumberRequest} from "../../services/slice/orderSlice";
+import {useAppDispatch, useAppSelector} from "../../services/hooks";
 
 const OrderDetails = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const {items, bun} = useSelector(state => state.constructorSlice);
-  const {orderNumber, isLoading} = useSelector(state => state.orderSlice);
+  const {items, bun} = useAppSelector(state => state.constructorSlice);
+  const {orderNumber, isLoading} = useAppSelector(state => state.orderSlice);
 
   const idArray = items?.map(el => el._id);
-  idArray.push(bun?._id);
+  if(bun !== null) {
+    idArray.push(bun._id);
+  }
+
   useEffect(() => {
     dispatch(orderNumberRequest(idArray));
-    return () => dispatch(resetOrderNumber())
   }, [])
 
   return (
