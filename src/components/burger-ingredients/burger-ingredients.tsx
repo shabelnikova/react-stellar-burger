@@ -6,7 +6,7 @@ import BurgerIngredientsCategory from "../burger-ingredients-category/burger-ing
 
 const BurgerIngredients = () => {
   const [currentTab, setCurrentTab] = useState('buns')
-  const onClickTab = (tab) => {
+  const onClickTab = (tab: string) => {
     setCurrentTab(tab);
     const element = document.getElementById(tab);
     if(element) {

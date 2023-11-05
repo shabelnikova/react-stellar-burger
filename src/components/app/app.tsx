@@ -9,18 +9,19 @@ import ProfilePage from "../../pages/profile";
 import NotFoundPage from "../../pages/not-found";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../modal/modal";
-import {useDispatch, useSelector} from "react-redux";
 import HomePage from "../../pages/home";
 import OrderDetails from "../order-details/order-details";
 import Layout from "../layout/layout";
 import ProtectedRoute from "../protected-route/protected-route";
 import {currentUserRequest} from "../../services/slice/userSlice";
-import {ingredientsRequest} from "../../services/slice/ingredientsSlice";
+import {clearIngredientInfo, ingredientsRequest} from "../../services/slice/ingredientsSlice";
+import {useAppDispatch} from "../../services/hooks";
+import {resetOrderNumber} from "../../services/slice/orderSlice";
 
 function App() {
 const location = useLocation();
 const navigate = useNavigate();
-const dispatch = useDispatch();
+const dispatch = useAppDispatch();
 
 useEffect(() => {
     dispatch(ingredientsRequest())
@@ -30,10 +31,15 @@ useEffect(() => {
 }, []);
 
 const backgroundLocation = location.state?.background;
-const closePopup = () => {
+const closePopup = (path: string) => {
+    if(path.includes('ingredients')) {
+        dispatch(clearIngredientInfo());
+    }
+    if(path.includes('order')) {
+        dispatch(resetOrderNumber());
+    }
   navigate(backgroundLocation.pathname || '/', {replace: true});
 }
-
    return (
        <>
          <Routes location={backgroundLocation || location}>

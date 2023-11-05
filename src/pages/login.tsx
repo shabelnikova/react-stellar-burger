@@ -5,17 +5,19 @@ import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-b
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {authUserRequest} from "../services/slice/userSlice";
+import {ILogin} from "../services/types";
+
 const LoginPage = () => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<ILogin>({email: '', password: ''});
   const dispatch = useDispatch()
-  const onChange = e => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
     setUserData({
       ...userData,
       [name]: value
     })
   }
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const {email, password} = userData;
     if(!email || !password) {

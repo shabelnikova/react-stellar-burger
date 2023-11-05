@@ -1,12 +1,18 @@
 
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {request} from "../../utils/api";
-import {v4 as uuid4} from "uuid";
+import {IIngredientType} from "../../utils/types";
 
-const initialState = {
+interface IState {
+  data: IIngredientType[]
+  isLoading: boolean
+  ingredient: IIngredientType | {}
+
+}
+const initialState: IState = {
   data: [],
   isLoading: true,
-  ingredient: {}
+  ingredient: {},
 }
 const sliceName = 'ingredients';
 
@@ -27,19 +33,20 @@ const ingredientsSlice = createSlice({
   initialState,
   reducers: {
     showIngredientInfo: (state, action) => {
-      state.ingredient = action.payload
+      state.ingredient = action.payload;
     },
     clearIngredientInfo: (state) => {
-      state.ingredient = {}
+      state.ingredient = {};
     },
 
   },
   extraReducers: (builder) => {
+
     builder
       .addCase(ingredientsRequest.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(ingredientsRequest.fulfilled, (state, action, dispatch) => {
+      .addCase(ingredientsRequest.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.isLoading = false;
       })
@@ -50,5 +57,5 @@ const ingredientsSlice = createSlice({
 })
 
 export default ingredientsSlice.reducer
-export const {showIngredientInfo, clearIngredientInfo, addId} = ingredientsSlice.actions
+export const {showIngredientInfo, clearIngredientInfo} = ingredientsSlice.actions
 
