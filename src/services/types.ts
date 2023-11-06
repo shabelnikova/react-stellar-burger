@@ -1,6 +1,7 @@
-import {store} from './index';
+import {rootReducer, store} from './index';
 
-export type RootState = ReturnType<typeof store.getState>;
+
+export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 
 export interface IOrderResponse {
@@ -54,4 +55,14 @@ export interface IUserState {
     data: IUser | null,
     passwordReset: boolean,
     passwordForgot: boolean,
+}
+export interface IOrdersElement {
+    _id: string
+    ingredients: string[]
+    status: string
+    name: string
+    createdAt: string
+    updatedAt: string
+    number: number
+
 }

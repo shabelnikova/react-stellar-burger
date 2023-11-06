@@ -14,6 +14,7 @@ const OrderDetails = () => {
   const idArray = items?.map(el => el._id);
   if(bun !== null) {
     idArray.push(bun._id);
+    idArray.push(bun._id);
   }
 
   useEffect(() => {

@@ -17,6 +17,8 @@ import {currentUserRequest} from "../../services/slice/userSlice";
 import {clearIngredientInfo, ingredientsRequest} from "../../services/slice/ingredientsSlice";
 import {useAppDispatch} from "../../services/hooks";
 import {resetOrderNumber} from "../../services/slice/orderSlice";
+import OrderFeedPage from "../../pages/order-feed";
+import OrderDetailsInfo from "../order-details-info/order-details-info";
 
 function App() {
 const location = useLocation();
@@ -47,6 +49,9 @@ const closePopup = (path: string) => {
              <Route
                index
                element={<HomePage/>}/>
+               <Route
+                   path="feed"
+                   element={<OrderFeedPage/>}/>
              <Route
                path="login"
                element={
@@ -77,10 +82,16 @@ const closePopup = (path: string) => {
                <ProtectedRoute  >
                  <ProfilePage/>
                </ProtectedRoute>}/>
+             <Route
+               path="profile/orders"
+               element={
+                 <ProtectedRoute  >
+                   <ProfilePage/>
+                 </ProtectedRoute>}/>
 
-             <Route path="order" element={<OrderDetails/>}/>
              <Route path="*" element={<NotFoundPage />} />
              <Route path='ingredients/:id' element={<IngredientDetails />}/>
+
            </Route>
 
 
@@ -91,6 +102,12 @@ const closePopup = (path: string) => {
            </Modal>}/>
            <Route path='/order' element={<Modal closePopup={closePopup}>
              <OrderDetails />
+           </Modal>}/>
+           <Route path='/feed/:id' element={<Modal closePopup={closePopup}>
+             <OrderDetailsInfo/>
+           </Modal>}/>
+           <Route path='/profile/orders/:id' element={<Modal closePopup={closePopup}>
+             <OrderDetailsInfo/>
            </Modal>}/>
          </Routes>}
        </>

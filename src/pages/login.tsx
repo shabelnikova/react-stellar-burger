@@ -3,13 +3,13 @@ import cn from 'classnames';
 import styles from './pages.module.css'
 import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {authUserRequest} from "../services/slice/userSlice";
 import {ILogin} from "../services/types";
+import {useAppDispatch} from "../services/hooks";
 
 const LoginPage = () => {
   const [userData, setUserData] = useState<ILogin>({email: '', password: ''});
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch();
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.target;
     setUserData({

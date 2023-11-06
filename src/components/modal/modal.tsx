@@ -14,10 +14,8 @@ interface IProps {
 const Modal:FC<IProps> = ({children, closePopup}) => {
   const element = useMemo(() => document.createElement('div'), []);
   const location = useLocation();
-  console.log(location.pathname.includes('ingredients'))
-  console.log(location.pathname.includes('order'))
   useEffect(() => {
-    const closePopupByEscape = (e: {key: string}) => {
+    const closePopupByEscape = (e: KeyboardEvent) => {
       if(e.key === 'Escape') {
         closePopup(location.pathname);
       }

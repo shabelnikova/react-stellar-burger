@@ -19,3 +19,9 @@
   margin: 0 auto 20px;
 }
 
+.order_feed_container {
+  width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  gap: 60px;
+}
