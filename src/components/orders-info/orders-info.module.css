@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+.orders_container {
+  display: flex;
+  gap: 36px;
+  max-height: 450px;
+
+}
+.columns_container {
+   display: grid;
+   grid-template-columns: repeat(5, 1fr);
+   grid-auto-flow: row ;
+  gap: 8px;
+}
+.orders_list {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+
+}
+.ready_list_color {
+  color: #00CCCC;
+}
+.li_margin_bottom {
+  margin-bottom: 8px;
+}
+.li_margin_bottom:last-child {
+  margin-bottom: 0;
+}
+.orders.container {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 300px;
+}

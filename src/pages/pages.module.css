@@ -31,11 +31,9 @@
     align-items: center;
     cursor: pointer;
     text-decoration: none;
-    color: var(--text-primary-color);
+    color: var(--text-inactive-color);
 }
-.profile_buttons {
-    max-width: 480px;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+.link_active {
+    color: var(--text-primary-color);
+    text-decoration: none;
 }

@@ -1,0 +1,6 @@
+.profile_buttons {
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

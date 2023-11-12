@@ -5,7 +5,7 @@ import {NavLink, useMatch} from "react-router-dom";
 import {FC} from "react";
 const AppHeader: FC = () => {
   const isConstructor = useMatch( "/");
-  const isLine = useMatch( "/line" );
+  const isFeed = useMatch( "/feed" );
   const isProfile = useMatch("/profile" );
 interface INavLink {
   isActive: boolean
@@ -24,8 +24,8 @@ interface INavLink {
             <BurgerIcon type={isConstructor ? "primary" : "secondary"}/>
             <span>Конструктор</span>
           </NavLink>
-          <NavLink to={'/line'} className={setClassName}>
-            <ListIcon type={isLine ? "primary" : "secondary"}/>
+          <NavLink to={'/feed'} className={setClassName}>
+            <ListIcon type={isFeed ? "primary" : "secondary"}/>
             <span>Лента заказов</span>
           </NavLink>
         </div>
