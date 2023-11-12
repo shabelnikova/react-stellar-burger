@@ -7,7 +7,8 @@ import {
   setRefreshToken
 } from "./token";
 
-const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const WS_URL = 'wss://norma.nomoreparties.space/orders';
 const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then(error => Promise.reject(error));
 }
@@ -40,4 +41,24 @@ export const getUserWithRefresh = async() => {
   });
   return data;
 }
+export const getOrderWithRefresh = async(array: string[]) => {
+  const data = await request('orders', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', "Accept": 'application/json', 'Authorization': getAccessToken()},
+    body: JSON.stringify({
+      ingredients: array
+    })
+  });
+  return data;
+}
+export const getOrderByNumber = async(number: number) => {
+    const res = await request(`orders/${number}`,  {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    return res;
+}
+
 

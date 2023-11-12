@@ -22,12 +22,12 @@ const OrderDetails = () => {
   }, [])
 
   return (
-     <div className='pt-15  pb-30 pl-10 pr-10' onClick={e => e.stopPropagation()}>
+     <div className='pt-15  pb-30 pl-10 pr-10' onClick={e => e.stopPropagation()} >
        <div className={cn(styles.modal__header)}>
          <p className={ "text text_type_main-large"}></p>
        </div>
      <div className={cn(styles.modal__info)}>
-       <p className="text text_type_digits-large mb-8">{isLoading ? 'Wait...' : orderNumber}</p>
+       <p className="text text_type_digits-large mb-8" data-cy="order-number">{isLoading ? 'Wait...' : orderNumber}</p>
        <p className="text text_type_main-medium">
          идентификатор заказа
        </p>

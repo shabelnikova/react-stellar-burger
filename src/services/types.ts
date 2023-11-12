@@ -66,3 +66,23 @@ export interface IOrdersElement {
     number: number
 
 }
+//{
+//   "success": true,
+//   "orders": [
+//   {
+//     "_id": "654f466cc2cc61001b3d6f51",
+//     "ingredients": [
+//       "643d69a5c3f7b9001cfa0943",
+//       "643d69a5c3f7b9001cfa093c",
+//       "643d69a5c3f7b9001cfa093c"
+//     ],
+//     "owner": "654dc1f3c2cc61001b3d6c2c",
+//     "status": "done",
+//     "name": "Space краторный бургер",
+//     "createdAt": "2023-11-11T09:16:28.787Z",
+//     "updatedAt": "2023-11-11T09:16:29.044Z",
+//     "number": 25791,
+//     "__v": 0
+//   }
+// ]
+// }
