@@ -53,6 +53,8 @@ const onClickHandler = () => {
 
   return (
     <section className={cn(styles.burger__constructor)} ref={dropTarget} data-cy="constructor">
+      {(bun === null && items.length < 1) && <p className="text text_type_main-default text_color_inactive mt-15 pr-4">Чтобы оформить заказ, перетащите сюда ингредиенты вашего бургера.
+        Обратите внимание, что без булочки ваш заказ не может быть оформлен</p>}
       {bun && <div className={cn(styles.burger__item, 'ml-8 mb-4')} data-cy="constructor-bun-1">
         <ConstructorElement
           type="top"
