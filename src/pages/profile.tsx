@@ -8,8 +8,8 @@ import ProfileFormEdit from "../components/profile-edit/profile-form-edit";
 import OrderCardsContainer from "../components/order-cards-container/order-cards-container";
 import {wsConnect, wsDisconnect} from "../services/reducers/web-socket/actions";
 import {getAccessToken} from "../utils/token";
+import {WS_URL} from "../utils/api";
 const ProfilePage: FC = () => {
-  const url = 'wss://norma.nomoreparties.space/orders';
   const queryTokenArr = getAccessToken()?.split(' ');
   let queryToken: string | null = null;
   if(queryTokenArr) {
@@ -22,7 +22,7 @@ const ProfilePage: FC = () => {
   }, [])
 
   useEffect(() => {
-    dispatch(wsConnect(`${url}?token=${queryToken}`))
+    dispatch(wsConnect(`${WS_URL}?token=${queryToken}`))
     return () => {
       dispatch(wsDisconnect())
     };

@@ -7,7 +7,7 @@ interface IProps {
 const ModalOverlay: FC<IProps> = ({closePopup}) => {
 const location = useLocation();
   return (
-    <div onClick={() => closePopup(location.pathname)} className={styles.overlay}>
+    <div onClick={() => closePopup(location.pathname)} className={styles.overlay} data-cy="close-by-overlay">
 
     </div>
   );

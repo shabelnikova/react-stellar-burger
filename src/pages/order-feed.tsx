@@ -5,16 +5,13 @@ import OrderCardsContainer from "../components/order-cards-container/order-cards
 import OrdersInfo from "../components/orders-info/orders-info";
 import {useAppDispatch} from "../services/hooks";
 import {wsConnect, wsDisconnect} from "../services/reducers/web-socket/actions";
-import {useLocation} from "react-router-dom";
+import {WS_URL} from "../utils/api";
 
 
 const OrderFeedPage = () => {
   const dispatch = useAppDispatch();
-  const url = 'wss://norma.nomoreparties.space/orders/all';
-  const location = useLocation();
-  console.log(location)
   useEffect(() => {
-    dispatch(wsConnect(url))
+    dispatch(wsConnect(`${WS_URL}/all`))
     return () => {
       dispatch(wsDisconnect())
     };
@@ -31,7 +28,6 @@ const OrderFeedPage = () => {
         </section>
     );
 };
-
 export default OrderFeedPage;
 
 

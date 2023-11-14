@@ -12,6 +12,7 @@ const OrderCardsContainer = () => {
   const { orders } = useAppSelector(state => state.dataReducer.data);
   const {isUserLoaded} = useAppSelector(state => state.userSlice);
   const location = useLocation();
+
   const getOrderIngredient = (id: string) => {
     return data?.find((el) => el._id === id);
   }

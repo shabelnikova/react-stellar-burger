@@ -83,15 +83,16 @@ const closePopup = (path: string) => {
                  <ProfilePage/>
                </ProtectedRoute>}/>
              <Route
-               path="profile/orders"
-               element={
-                 <ProtectedRoute  >
-                   <ProfilePage/>
-                 </ProtectedRoute>}/>
+                 path="profile/orders"
+                 element={
+                   <ProtectedRoute  >
+                     <ProfilePage/>
+                   </ProtectedRoute>}/>
 
              <Route path="*" element={<NotFoundPage />} />
              <Route path='ingredients/:id' element={<IngredientDetails />}/>
-
+             <Route path='profile/orders/:number' element={  <ProtectedRoute><OrderDetailsInfo/></ProtectedRoute>}  />
+             <Route path='/feed/:number' element={  <OrderDetailsInfo/>}  />
            </Route>
 
 
@@ -103,10 +104,10 @@ const closePopup = (path: string) => {
            <Route path='/order' element={<Modal closePopup={closePopup}>
              <OrderDetails />
            </Modal>}/>
-           <Route path='/feed/:id' element={<Modal closePopup={closePopup}>
+           <Route path='/feed/:number' element={<Modal closePopup={closePopup}>
              <OrderDetailsInfo/>
            </Modal>}/>
-           <Route path='/profile/orders/:id' element={<Modal closePopup={closePopup}>
+           <Route path='/profile/orders/:number' element={<Modal closePopup={closePopup}>
              <OrderDetailsInfo/>
            </Modal>}/>
          </Routes>}

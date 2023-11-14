@@ -1,7 +1,8 @@
 {
-  "name": "react-burger-starter",
+  "name": "react-stellar-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/shabelnikova/react-stellar-burger",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@types/react": "^18.2.33",
@@ -9,6 +10,7 @@
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "classnames": "^2.3.2",
     "clsx": "^1.2.1",
+    "firebase": "^10.6.0",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -27,18 +29,28 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^29.5.6",
     "@types/node": "^20.8.9",
     "@types/uuid": "^9.0.6",
+    "cypress": "^13.4.0",
+    "eslint-plugin-cypress": "^2.15.1",
+    "fetch-mock": "^9.11.0",
+    "gh-pages": "^6.0.0",
+    "jest": "^27.5.1",
+    "react-test-renderer": "^18.2.0",
+    "redux-mock-store": "^1.5.4",
     "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress": "cypress open cache clear",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

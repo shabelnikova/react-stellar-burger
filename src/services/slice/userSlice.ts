@@ -19,7 +19,7 @@ import {
 
 const token = getRefreshToken();
 
-const initialState: IUserState = {
+export const initialState: IUserState = {
   isPending: false,
   isAuthChecked: false,
   isUserLoaded: false,

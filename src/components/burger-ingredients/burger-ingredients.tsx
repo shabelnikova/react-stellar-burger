@@ -21,7 +21,7 @@ const BurgerIngredients = () => {
         <Tab active={currentTab === 'sauces'} value={'sauces'} onClick={onClickTab}>Соусы</Tab>
         <Tab active={currentTab === 'mains'} value={'mains'} onClick={onClickTab}>Начинки</Tab>
       </div>
-      <div className={cn(styles.scroll__container)}>
+      <div className={cn(styles.scroll__container)} data-cy="ingredients">
         <BurgerIngredientsCategory setCurrentTab={setCurrentTab} />
       </div>
     </section>
