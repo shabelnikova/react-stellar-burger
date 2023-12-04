@@ -1,0 +1,32 @@
+.cards__img {
+    max-width: 240px;
+    object-fit: cover;
+}
+.card__digits {
+    margin: 0;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: #F2F2F3;
+    text-align: center;
+
+}
+.card__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.card__description {
+    text-align: center;
+}
+.isActive {
+    display: block;
+}
+.isNotActive {
+    display: none;
+}
