@@ -33,6 +33,7 @@ useEffect(() => {
 }, []);
 
 const backgroundLocation = location.state?.background;
+    console.log(backgroundLocation)
 const closePopup = (path: string) => {
     if(path.includes('ingredients')) {
         dispatch(clearIngredientInfo());
