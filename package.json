@@ -2,7 +2,6 @@
   "name": "react-stellar-burger",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://shabelnikova.github.io/react-stellar-burger",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@types/react": "^18.2.33",
@@ -48,9 +47,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress": "cypress open cache clear",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "cypress": "cypress open cache clear"
   },
   "eslintConfig": {
     "extends": [
